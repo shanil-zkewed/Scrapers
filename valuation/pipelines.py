@@ -7,7 +7,6 @@ import pymongo
 from pymongo import MongoClient
 
 from scrapy import settings
-from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
 
 today1 = str(date.today())
@@ -20,7 +19,6 @@ yesterday = date.today()- timedelta(days = 1)
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
 
 
 class ValuationPipeline1:

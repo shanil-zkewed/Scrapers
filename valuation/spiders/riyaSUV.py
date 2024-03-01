@@ -24,7 +24,7 @@ class RiyaSpider(scrapy.Spider):
            #next_page_url = next_page
 
         #uncomment this after testing
-           #yield scrapy.Request(url=next_page_url,callback=self.parse)
+           yield scrapy.Request(url=next_page_url,callback=self.parse)
 
     def parse_veh_page(self, response):
  

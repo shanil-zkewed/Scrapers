@@ -20,7 +20,7 @@ class PatpatSpider(scrapy.Spider):
         if next_page_url:
           next_page_url = response.urljoin(next_page_url)
           # uncomment line below after testing
-          #yield scrapy.Request(url=next_page_url,callback=self.parse)
+          yield scrapy.Request(url=next_page_url,callback=self.parse)
 
     def parse_veh_page(self, response):
         page = response.css('.holder.container.item-preview')

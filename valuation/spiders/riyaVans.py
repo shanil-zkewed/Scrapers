@@ -23,7 +23,7 @@ class RiyaSpider(scrapy.Spider):
            next_page_url = response.urljoin(next_page)
            #next_page_url = next_page
 
-           #yield scrapy.Request(url=next_page_url,callback=self.parse)
+           yield scrapy.Request(url=next_page_url,callback=self.parse)
 
     def parse_veh_page(self, response):
  
