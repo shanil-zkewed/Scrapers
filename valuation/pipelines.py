@@ -29,7 +29,7 @@ class ValuationPipeline1:
             27017
         )
         db = self.conn['data_store']
-        self.collection = db['vehicle_data_2024_03']
+        self.collection = db['vehicle_data_2024_3']
 
     def process_item(self, item, spider):
         if spider.name not in ['ikmancars','ikmanTest']: 
@@ -43,6 +43,7 @@ class ValuationPipeline1:
         #temp_date1 = datetime.datetime.strptime(temp_date1, format)
         price = item["price"]
         temp = price[0].split(" ")[1]
+        temp2 = temp.replace(",", "",)
         
         item["url"] = item["url"][0]
         item["category"] = item["category"][0]
@@ -50,7 +51,7 @@ class ValuationPipeline1:
         item["model"] = item["model"][0]
         item["year"] = item["year"][0]
         item["condition"] = item["condition"][0]
-        item["price"] = temp
+        item["price"] = temp2
         item["mileage"] = item["mileage"][0]
         item["gear"] = item["gear"][0]
         item["fuel_type"] = item["fuel_type"][0]
@@ -79,10 +80,10 @@ class ValuationPipeline2:
             27017
         )
         db = self.conn['data_store']
-        self.collection = db['vehicle_data_2024_03']
+        self.collection = db['vehicle_data_2024_3']
 
     def process_item(self, item, spider):
-        if spider.name not in ['ikmanvans', 'ikmanbuses', 'ikman3wheeler', 'ikmanbikes','ikmanlorries']: 
+        if spider.name not in ['ikmanvans', 'ikmanbuses', 'ikmanbikes','ikmanlorries']: 
             return item
         
         p_date = item["date"]  
@@ -92,7 +93,51 @@ class ValuationPipeline2:
         #temp_date1 = datetime.datetime.strptime(temp_date1, format)
         price = item["price"]
         temp = price[0].split(" ")[1]
+        temp2 = temp.replace(",", "",)
+
+        price = item["price"]
         
+        item["url"] = item["url"][0]
+        item["category"] = item["category"][0]
+        item["make"] = item["make"][0]
+        item["model"] = item["model"][0]
+        item["year"] = item["year"][0]
+        #item["condition"] = item["condition"][0]
+        item["price"] = temp2
+        item["mileage"] = item["mileage"][0]
+        item["engine_capability"] = item["engine_capability"][0]
+        item["location"] = item["location"][0]
+        item["date"] = final_date
+        item["scraped_date"] = today1
+        item["store"] = "Ikman"            
+        item["store"] = "Ikman"            
+
+
+        self.collection.insert_one(dict(item))
+        return item
+
+class ValuationPipeline_ikman3wheeler:
+    def __init__(self):
+        self.conn = pymongo.MongoClient(
+            "mongodb+srv://zkewed:zkewed123A@vehicalevaluation.d9ufa.mongodb.net/?retryWrites=true&w=majority",
+            27017
+        )
+        db = self.conn['data_store']
+        self.collection = db['vehicle_data_2024_3']
+
+    def process_item(self, item, spider):
+        if spider.name not in ['ikman3wheeler']: 
+            return item
+        
+        p_date = item["date"]  
+        temp_date = p_date[0].split(" ")[1] + " " + p_date[0].split(" ")[0] + " "  + str(date.today().year)
+        temp_date1 = datetime.strptime(temp_date, '%b %d %Y')
+        final_date= datetime.strftime(temp_date1, '%Y-%m-%d')
+        #temp_date1 = datetime.datetime.strptime(temp_date1, format)
+        price = item["price"]
+        temp = price[0].split(" ")[1]
+        temp2 = temp.replace(",", "",)
+
         price = item["price"]
         temp = price[0].split(" ")[1]
 
@@ -101,9 +146,9 @@ class ValuationPipeline2:
         item["make"] = item["make"][0]
         item["model"] = item["model"][0]
         item["year"] = item["year"][0]
-        item["price"] = temp
+        item["condition"] = item["condition"][0]
+        item["price"] = temp2
         item["mileage"] = item["mileage"][0]
-        item["engine_capability"] = item["engine_capability"][0]
         item["location"] = item["location"][0]
         item["date"] = final_date
         item["scraped_date"] = today1
@@ -114,6 +159,7 @@ class ValuationPipeline2:
         return item
 
 
+
 class ValuationPipeline3:
     def __init__(self):
         self.conn = pymongo.MongoClient(
@@ -121,7 +167,7 @@ class ValuationPipeline3:
             27017
         )
         db = self.conn['data_store']
-        self.collection = db['vehicle_data_2024_03']
+        self.collection = db['vehicle_data_2024_3']
 
     def process_item(self, item, spider):
         if spider.name not in ['riya_cars','riya_suvs','riya_lorries','riya_3wheel',
@@ -133,6 +179,7 @@ class ValuationPipeline3:
         temp_category = category[0].split(" ")[-2]
         price = item["price"]
         temp = price[0].split(" ")[1]
+        temp2 = temp.replace(",", "",)
         location = item["location"][0].split(", ")[-1]
         date1 = item["date"][0]
         #temp_date = re.search(r'\d{4}-\d{2}-\d{2}', date)
@@ -148,7 +195,7 @@ class ValuationPipeline3:
         item["gear"] = item["gear"][0]
         item["fuel_type"] = item["fuel_type"][0]
         item["mileage"] = item["mileage"][0]
-        item["price"] = temp
+        item["price"] = temp2
         item["date"] = temp_date[0]
         #item["scraped_date"] = str(date.today().strftime('%m/%d/%y'))
         item["scraped_date"] = today1
@@ -169,15 +216,17 @@ class ValuationPipeline4:
             27017
         )
         db = self.conn['data_store']
-        self.collection = db['vehicle_data_2024_03']
+        self.collection = db['vehicle_data_2024_3']
 
 
     def process_item(self, item, spider):
         if spider.name not in ['patpat']: 
             return item
         
-        price = item["price"][0]
-        #temp = price[0].split(" ")[1]
+        price = item["price"].replace(",", "",)
+        #temp = price.replace(",", "",)
+        #temp2 = temp.replace(",", "",)
+        
         #location = item["location"][0].split(", ")[-1]
         location = item["location"].split(", ")[-1]
         date1 = item["date"]
@@ -187,6 +236,7 @@ class ValuationPipeline4:
         item["url"] = item["url"][0]
         item["location"] = location
         #item['category'] = item['category'][0].title()
+        item['price'] = price
         item['category'] = item['category'].title()
         item["date"] = temp_date[0]
         #item["scraped_date"] = str(date.today().strftime('%m/%d/%y'))

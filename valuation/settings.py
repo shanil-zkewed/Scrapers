@@ -69,13 +69,15 @@ ITEM_PIPELINES = {
     "valuation.pipelines.ValuationPipeline2": 300,
     "valuation.pipelines.ValuationPipeline3": 300,
     "valuation.pipelines.ValuationPipeline4": 300,
+    "valuation.pipelines.ValuationPipeline_ikman3wheeler":300,
 }
 
 SPIDER_MIDDLEWARES = {
     'scrapy_deltafetch.DeltaFetch': 100,
 }
 
-CLOSESPIDER_PAGECOUNT = 60
+#CLOSESPIDER_PAGECOUNT = 400
+
 
 '''
 MONGODB_SERVER = "vehicalevaluation.d9ufa.mongodb.net"

@@ -17,14 +17,16 @@ class RiyaSpider(scrapy.Spider):
             ##yield scrapy.Request(url=relative_url,callback=self.parse_veh_page)
             yield response.follow(url=relative_url,callback=self.parse_veh_page)
 
+        for i in range(1,5):
         #next_page = response.css('div.pagination>a:nth-last-child(2)::attr(href)').extract_first()
-        next_page = response.css('div[id = "content"] div.pagination>a:nth-last-child(2)::attr(href)').extract_first()
-        if next_page:
-           next_page_url = response.urljoin(next_page)
-           #next_page_url = next_page
+            #next_page = response.css('div[id = "content"] div.pagination>a:nth-last-child(2)::attr(href)').extract_first()
+            next_page = "https://riyasewana.com/search/suvs?page="+str(i)
+            if next_page is not None:
+                #next_page_url = response.urljoin(next_page)
+            #next_page_url = next_page
 
-        #uncomment this after testing
-           yield scrapy.Request(url=next_page_url,callback=self.parse)
+            #uncomment this after testing
+                yield scrapy.Request(url=next_page,callback=self.parse)
 
     def parse_veh_page(self, response):
  

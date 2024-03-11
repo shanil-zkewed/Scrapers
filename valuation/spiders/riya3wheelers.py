@@ -17,6 +17,14 @@ class RiyaSpider(scrapy.Spider):
             ##yield scrapy.Request(url=relative_url,callback=self.parse_veh_page)
             yield response.follow(url=relative_url,callback=self.parse_veh_page)
 
+        for i in range(1,8):
+            next_page = "https://riyasewana.com/search/three-wheels?page="+str(i)      
+            #next_page = response.css('a[class*="col-6 lg-3 pag-next"] ::attr(href)').extract_first()
+            if next_page is not None:
+                #yield response.follow(next_page, callback=self.parse)
+                yield scrapy.Request(url=next_page,callback=self.parse)
+
+        '''
         #next_page = response.css('div.pagination>a:nth-last-child(2)::attr(href)').extract_first()
         next_page = response.css('div[id = "content"] div.pagination>a:nth-last-child(2)::attr(href)').extract_first()
         if next_page:
@@ -24,7 +32,7 @@ class RiyaSpider(scrapy.Spider):
            #next_page_url = next_page
 
            yield scrapy.Request(url=next_page_url,callback=self.parse)
-
+        '''
     def parse_veh_page(self, response):
  
         heading = response.css('div[id = "content"]')

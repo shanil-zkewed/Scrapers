@@ -16,11 +16,21 @@ class PatpatSpider(scrapy.Spider):
             yield response.follow(url=relative_url,callback=self.parse_veh_page)
     
         #next_page_url = response.css('ul.pagination.pagination.li.nth-last-child(2)::attr(href)').extract_first()
-        next_page_url = response.css('.pagination>li:last-child>a::attr(href)').extract_first()
+        #2024-03-05
+        #next_page_url = response.css('.pagination>li:last-child>a::attr(href)').extract_first()
+
+        for i in range(1,10):
+            next_page = 'https://www.patpat.lk/vehicle?page='+str(i)+'&city=&sub_category=&sub_category_name=&category=vehicle&search_txt=&sort_by='
+        
+            if next_page is not None:
+                #yield response.follow(next_page, callback=self.parse)
+                yield scrapy.Request(url=next_page,callback=self.parse)
+        '''
         if next_page_url:
           next_page_url = response.urljoin(next_page_url)
           # uncomment line below after testing
           yield scrapy.Request(url=next_page_url,callback=self.parse)
+          '''
 
     def parse_veh_page(self, response):
         page = response.css('.holder.container.item-preview')
