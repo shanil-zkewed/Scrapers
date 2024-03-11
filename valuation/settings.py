@@ -75,6 +75,8 @@ SPIDER_MIDDLEWARES = {
     'scrapy_deltafetch.DeltaFetch': 100,
 }
 
+CLOSESPIDER_PAGECOUNT = 60
+
 '''
 MONGODB_SERVER = "vehicalevaluation.d9ufa.mongodb.net"
 MONGODB_PORT = 27017

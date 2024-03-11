@@ -19,7 +19,7 @@ class IkmanSpider(scrapy.Spider):
             relative_url = item.css('a::attr(href)').get()
             yield response.follow(url=relative_url,callback=self.parse_veh_page)
         
-        for i in range(1,4):
+        for i in range(1,3):
             next_page = "https://ikman.lk/en/ads/sri-lanka/buses?sort=date&order=desc&buy_now=0&urgent=0&page="+str(i)      
             #next_page = response.css('a[class*="col-6 lg-3 pag-next"] ::attr(href)').extract_first()
             if next_page is not None:

@@ -29,7 +29,7 @@ class ValuationPipeline1:
             27017
         )
         db = self.conn['data_store']
-        self.collection = db['test_pipeline']
+        self.collection = db['vehicle_data_2024_03']
 
     def process_item(self, item, spider):
         if spider.name not in ['ikmancars','ikmanTest']: 
@@ -79,7 +79,7 @@ class ValuationPipeline2:
             27017
         )
         db = self.conn['data_store']
-        self.collection = db['test_pipeline']
+        self.collection = db['vehicle_data_2024_03']
 
     def process_item(self, item, spider):
         if spider.name not in ['ikmanvans', 'ikmanbuses', 'ikman3wheeler', 'ikmanbikes','ikmanlorries']: 
@@ -121,7 +121,7 @@ class ValuationPipeline3:
             27017
         )
         db = self.conn['data_store']
-        self.collection = db['test_pipeline']
+        self.collection = db['vehicle_data_2024_03']
 
     def process_item(self, item, spider):
         if spider.name not in ['riya_cars','riya_suvs','riya_lorries','riya_3wheel',
@@ -169,7 +169,7 @@ class ValuationPipeline4:
             27017
         )
         db = self.conn['data_store']
-        self.collection = db['test_pipeline']
+        self.collection = db['vehicle_data_2024_03']
 
 
     def process_item(self, item, spider):
