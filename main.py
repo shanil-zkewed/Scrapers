@@ -14,7 +14,7 @@ def task():
     print("done!")
 
 
-schedule.every().day.at('09:10:00').do(task)
+schedule.every().day.at('09:50:00').do(task)
 
 while True:
     schedule.run_pending()
