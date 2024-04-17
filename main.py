@@ -6,6 +6,7 @@ import requests
 # running other file using run()
 
 def task():
+ 
     while True:
         try:
             os.system("scrapy crawl ikmanvans")
@@ -57,13 +58,13 @@ def task():
     os.system("scrapy crawl riya_vans")
     os.system("scrapy crawl riya_suvs")
     os.system("scrapy crawl riya_cars")
-    os.system("scrapy crawl patpat")'''
+    os.system("scrapy crawl patpat")
 
 
     print("done!")
+    '''
 
-
-schedule.every().day.at('15:05:00').do(task)
+schedule.every().day.at('07:50:00').do(task)
 
 while True:
     schedule.run_pending()
