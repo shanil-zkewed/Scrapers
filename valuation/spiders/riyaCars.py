@@ -1,7 +1,7 @@
 import scrapy
 from valuation.items import RiyaCarItem
 
-class RiyaSpider(scrapy.Spider):
+class RiyaCarsSpider(scrapy.Spider):
     name = "riya_cars"
     allowed_domains = ["riyasewana.com"]
     start_urls = ["https://riyasewana.com/search/cars"]

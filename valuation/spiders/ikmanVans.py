@@ -6,7 +6,7 @@ from valuation.items import IkmanVanItem
 datetime.today().strftime('%Y-%m-%d')
 
 
-class IkmanSpider(scrapy.Spider):
+class IkmanVansSpider(scrapy.Spider):
     name = "ikmanvans"
     allowed_domains = ["ikman.lk"]
     start_urls = ["https://ikman.lk/en/ads/sri-lanka/vans"]

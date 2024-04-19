@@ -4,7 +4,7 @@ import time
 import requests
  
 # running other file using run()
-
+'''
 def task():
  
     while True:
@@ -72,45 +72,19 @@ while True:
 '''
 
 from multiprocessing import Process, Queue
-from valuation.spiders import patpat
-from valuation.spiders import ikmanCars
-from valuation.spiders import riyaSUV
-from valuation.spiders import riyaCars
+from valuation.spiders.patpat import PatpatSpider
+from valuation.spiders.ikmanCars import IkmanCarSpider
+from valuation.spiders.ikmanVans import IkmanVansSpider
+from valuation.spiders.riyaSUV import RiyaSUVSpider
+from valuation.spiders.riyaCars import RiyaCarsSpider
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
-def my_cloud_function(event, context):
-    def script(queue):
-        try:
-            settings = get_project_settings()
-
-            settings.setdict({
-                'LOG_LEVEL': 'ERROR',
-                'LOG_ENABLED': True,
-            })
-
-            process = CrawlerProcess(settings)
-            process.crawl(patpat)
-            process.crawl(ikmanCars)
-            process.crawl(riyaCars)
-            process.crawl(riyaSUV)
-            process.start()
-            print('start')
-            queue.put(None)
-        except Exception as e:
-            queue.put(e)
-
-    queue = Queue()
-
-    # wrap the spider in a child process
-    main_process = Process(target=script, args=(queue,))
-    main_process.start()    # start the process
-    main_process.join()     # block until the spider finishes
-
-    result = queue.get()    # check the process did not return an error
-    if result is not None:
-        raise result 
-
-    return 'ok'
-
-'''
+settings = get_project_settings()
+process = CrawlerProcess(settings)
+process.crawl(PatpatSpider)
+process.crawl(IkmanCarSpider)
+process.crawl(IkmanVansSpider)
+process.crawl(RiyaCarsSpider)
+process.crawl(RiyaSUVSpider)
+process.start()  # the script will block here until all crawling jobs are finished
